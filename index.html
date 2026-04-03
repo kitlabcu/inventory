@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Daily Inventory</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#F2F2F7;min-height:100vh;padding-bottom:40px}
+.app{max-width:620px;margin:0 auto;padding:12px 10px}
+.header{background:#fff;border-radius:14px;padding:14px 16px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,0.08);display:flex;justify-content:space-between;align-items:center}
+.header-title{font-size:18px;font-weight:600;color:#1C1C1E}
+.header-date{font-size:13px;color:#8E8E93;margin-top:2px}
+.sync-dot{width:8px;height:8px;border-radius:50%;background:#ccc;display:inline-block;margin-right:4px;transition:background 0.3s}
+.sync-dot.synced{background:#1D9E75}
+.sync-dot.syncing{background:#FF9500}
+.sync-dot.error{background:#FF3B30}
+.sync-label{font-size:11px;color:#8E8E93}
+.store-tabs{display:flex;gap:6px;margin-bottom:10px}
+.store-tab{flex:1;padding:11px 4px;border:none;border-radius:10px;background:#fff;color:#8E8E93;font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:all 0.15s;box-shadow:0 1px 3px rgba(0,0,0,0.07)}
+.store-tab.active{background:#1D9E75;color:#fff;box-shadow:0 2px 8px rgba(29,158,117,0.35)}
+.store-tab.mgr.active{background:#534AB7;box-shadow:0 2px 8px rgba(83,74,183,0.35)}
+.day-tabs{display:flex;gap:5px;margin-bottom:10px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.day-tab{flex-shrink:0;padding:7px 10px;border:none;border-radius:10px;background:#fff;color:#8E8E93;font-size:11px;font-weight:500;cursor:pointer;transition:all 0.15s;text-align:center;line-height:1.4;box-shadow:0 1px 3px rgba(0,0,0,0.07)}
+.day-tab.today{color:#1D9E75;font-weight:700}
+.day-tab.active{background:#185FA5;color:#fff;box-shadow:0 2px 6px rgba(24,95,165,0.3)}
+.day-tab.today.active{background:#1D9E75}
+.section-gap{height:12px}
+.item-row{display:flex;align-items:center;gap:10px;padding:11px 14px;background:#fff;border-bottom:1px solid #F2F2F7}
+.item-row:first-child{border-radius:14px 14px 0 0}
+.item-row:last-child{border-radius:0 0 14px 14px;border-bottom:none}
+.item-row.only{border-radius:14px;border-bottom:none}
+.item-row.stripe-b{background:#FAFAFA}
+.status-bar{width:4px;height:38px;border-radius:3px;flex-shrink:0}
+.bar-ok{background:#1D9E75}.bar-low{background:#FF9500}.bar-crit{background:#FF3B30}
+.item-emoji{font-size:26px;width:34px;text-align:center;flex-shrink:0}
+.item-info{flex:1;min-width:0}
+.item-name{font-size:14px;font-weight:600;color:#1C1C1E;line-height:1.2}
+.item-sub{font-size:11px;color:#8E8E93;margin-top:2px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.flag{font-size:10px;padding:2px 7px;border-radius:20px}
+.flag-check{background:#E3F2FD;color:#1565C0}
+.flag-half{background:#FFF3E0;color:#E65100}
+.counter{display:flex;align-items:center;flex-shrink:0}
+.btn{width:44px;height:44px;border:none;background:#F2F2F7;color:#1C1C1E;font-size:22px;cursor:pointer;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all 0.1s;flex-shrink:0;-webkit-tap-highlight-color:transparent;font-weight:300}
+.btn:active{transform:scale(0.88);background:#E5E5EA}
+.count-val{width:46px;text-align:center;font-size:19px;font-weight:700;color:#1C1C1E}
+.summary-bar{background:#fff;border-radius:12px;padding:10px 14px;margin-bottom:10px;display:flex;gap:8px;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,0.07)}
+.summary-pill{text-align:center;flex:1;padding:8px 4px;border-radius:10px}
+.summary-pill.ok-p{background:#E8F5E9}
+.summary-pill.low-p{background:#FFF8E1}
+.summary-pill.crit-p{background:#FFEBEE}
+.summary-num{font-size:22px;font-weight:700}
+.summary-label{font-size:10px;font-weight:600;margin-top:1px}
+.submitted-bar{background:#E8F5E9;border-radius:12px;padding:10px 14px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.07)}
+.edit-btn{font-size:12px;padding:6px 14px;border:1.5px solid #1D9E75;border-radius:20px;background:transparent;color:#1D9E75;cursor:pointer;font-weight:600}
+.submit-btn{width:100%;padding:16px;border:none;border-radius:14px;background:#1D9E75;color:#fff;font-size:16px;font-weight:700;cursor:pointer;margin-top:12px;box-shadow:0 2px 8px rgba(29,158,117,0.35);-webkit-tap-highlight-color:transparent}
+.submit-btn:active{transform:scale(0.98)}
+.mgr-row{display:flex;align-items:center;gap:10px;padding:11px 14px;background:#fff;border-bottom:1px solid #F2F2F7}
+.mgr-row:first-child{border-radius:14px 14px 0 0}
+.mgr-row:last-child{border-radius:0 0 14px 14px;border-bottom:none}
+.mgr-row.only{border-radius:14px;border-bottom:none}
+.mgr-row.stripe-b{background:#FAFAFA}
+.badge{font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px}
+.low-b{background:#FFF8E1;color:#E65100}
+.crit-b{background:#FFEBEE;color:#C62828}
+.ok-b{background:#E8F5E9;color:#2E7D32}
+.export-btn{width:100%;padding:14px;border:1.5px solid #8E8E93;border-radius:14px;background:#fff;color:#1C1C1E;font-size:14px;font-weight:600;cursor:pointer;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:8px}
+.loading{text-align:center;padding:40px 20px;color:#8E8E93;font-size:15px}
+.spinner{width:28px;height:28px;border:3px solid #E5E5EA;border-top-color:#1D9E75;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* Location screen */
+.location-screen{padding:20px 6px 10px}
+.loc-title{font-size:24px;font-weight:700;color:#1C1C1E;text-align:center;margin-bottom:6px}
+.loc-sub{font-size:14px;color:#8E8E93;text-align:center;margin-bottom:28px}
+.loc-btn{width:100%;padding:18px 20px;border:none;border-radius:16px;background:#fff;color:#1C1C1E;font-size:17px;font-weight:600;cursor:pointer;margin-bottom:12px;display:flex;align-items:center;gap:16px;box-shadow:0 1px 4px rgba(0,0,0,0.1);-webkit-tap-highlight-color:transparent;text-align:left}
+.loc-btn:active{transform:scale(0.98)}
+.loc-btn.sw{border-left:5px solid #1D9E75}
+.loc-btn.cc{border-left:5px solid #185FA5}
+.loc-btn.mg{border-left:5px solid #534AB7}
+.loc-icon{font-size:34px;width:44px;text-align:center;flex-shrink:0}
+.loc-desc{font-size:12px;color:#8E8E93;font-weight:400;margin-top:2px}
+.loc-bar{background:#fff;border-radius:12px;padding:10px 14px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.07)}
+.change-btn{font-size:12px;padding:5px 12px;border:1.5px solid #8E8E93;border-radius:20px;background:transparent;color:#8E8E93;cursor:pointer;font-weight:600}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div>
+      <div class="header-title">Daily Inventory</div>
+      <div class="header-date" id="dateLabel"></div>
+    </div>
+    <div style="text-align:right">
+      <div><span class="sync-dot" id="syncDot"></span><span class="sync-label" id="syncLabel">Connecting...</span></div>
+      <div style="font-size:11px;color:#8E8E93;margin-top:2px" id="weekLabel"></div>
+    </div>
+  </div>
+
+  <!-- Location picker -->
+  <div id="locationScreen">
+    <div class="location-screen">
+      <div class="loc-title">Which location are you?</div>
+      <div class="loc-sub">Tap your store to start inventory</div>
+      <button class="loc-btn sw" onclick="confirmLocation(0)">
+        <div class="loc-icon">🌿</div>
+        <div><div>Sawtelle</div><div class="loc-desc">Morning prep + fridge count</div></div>
+      </button>
+      <button class="loc-btn cc" onclick="confirmLocation(1)">
+        <div class="loc-icon">🏙️</div>
+        <div><div>Culver City</div><div class="loc-desc">Morning prep + fridge count</div></div>
+      </button>
+      <button class="loc-btn mg" onclick="confirmLocation(2)">
+        <div class="loc-icon">📊</div>
+        <div><div>Manager</div><div class="loc-desc">View all stores live</div></div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main app -->
+  <div id="mainApp" style="display:none">
+    <div class="loc-bar">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span id="locationIcon" style="font-size:18px"></span>
+        <span style="font-size:14px;font-weight:600;color:#1C1C1E" id="locationName"></span>
+      </div>
+      <button class="change-btn" onclick="changeLocation()">Change location</button>
+    </div>
+    <div class="day-tabs" id="dayTabs"></div>
+    <div id="storeView"></div>
+    <div id="managerView" style="display:none"></div>
+  </div>
+</div>
+
+<!-- Firebase SDKs -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getDatabase, ref, set, onValue, get } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDsil2K24WjakedZxEQRphMjQkeLQpYVJA",
+  authDomain: "kitchenlabskiosk.firebaseapp.com",
+  projectId: "kitchenlabskiosk",
+  storageBucket: "kitchenlabskiosk.firebasestorage.app",
+  messagingSenderId: "172493450291",
+  appId: "1:172493450291:web:0d4cbb57f5d40c41e44746",
+  databaseURL: "https://kitchenlabskiosk-default-rtdb.firebaseio.com"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getDatabase(firebaseApp);
+
+// ── Items & Config ────────────────────────────────────────────────────────────
+const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const STORES=['Sawtelle','Culver City'];
+const STORE_KEYS=['sawtelle','culver'];
+const STORE_ICONS=['🌿','🏙️'];
+
+const items=[
+  {name:'Cucumbers for Bun',e:'🥒',t:1.5,f:'half',s:0},
+  {name:'Jalapeños',e:'🌶️',t:1.5,s:0},
+  {name:'Limes',e:'🍋',t:1.5,s:0},
+  {name:'Herbs',e:'🌿',t:1.5,s:0},
+  {name:'Lettuce for Bun',e:'🥬',t:5,s:0},
+  {name:'Green Onions',e:'🧅',t:1,s:0},
+  {name:'Shrimp for Spring Roll',e:'🦐',t:2,s:1},
+  {name:'Pork for Spring Roll',e:'🥩',t:1.5,s:1},
+  {name:'Brisket (Sliced)',e:'🥩',t:1.5,f:'check',s:1},
+  {name:'Filet',e:'🥩',t:4,f:'check',s:1},
+  {name:'Veggie Broth',e:'🍵',t:3,s:1},
+  {name:'Fish Sauce',e:'🧴',t:2,s:1},
+  {name:'Pickled Carrots/Daikon',e:'🥕',t:4,s:1},
+  {name:'Eggroll',e:'🥢',t:6,s:1},
+  {name:'Pork Patties',e:'🥓',t:4,s:1},
+  {name:'Tripe',e:'🍖',t:1.5,s:1},
+  {name:'Pork Belly',e:'🥩',t:1,s:1},
+  {name:'Pork Belly Sauce',e:'🍶',t:1,s:1},
+  {name:'Ginger Sauce',e:'🫙',t:0.5,s:1},
+  {name:'Mushrooms Cooked',e:'🍄',t:3,s:1},
+  {name:'Fried Tofu',e:'🟨',t:2.5,s:1},
+  {name:'Beef Shank Cooked',e:'🍖',t:2,f:'check',s:1},
+  {name:'Chicken Shredded',e:'🍗',t:4,f:'check',s:1},
+  {name:'Chef Special',e:'⭐',t:12,s:1},
+  {name:'White Onions',e:'🧅',t:2,s:1},
+  {name:'Beefballs',e:'⚪',t:3,s:1},
+  {name:'Eggs',e:'🥚',t:5,s:1},
+  {name:'Veggie Pho - Carrots & Daikon',e:'🥕',t:1,s:1},
+  {name:'Vegetarian Sauce',e:'🫙',t:1,s:1},
+  {name:'BBH Chili Oil',e:'🌶️',t:0.25,s:1},
+  {name:'Sandwich Bags',e:'🛍️',t:1.5,s:1},
+  {name:'Grilled Pork',e:'🍖',t:3,f:'check',s:1},
+  {name:'Grilled Steak',e:'🥩',t:2,f:'check',s:1},
+  {name:'Grilled Chicken',e:'🍗',t:2,f:'check',s:1},
+  {name:'Basil',e:'🌱',t:6,s:1},
+  {name:'Mint',e:'🍃',t:2,s:1},
+  {name:'Whole Lettuce',e:'🥗',t:14,s:1},
+  {name:'Sprouts',e:'🌾',t:9,s:1},
+  {name:'Cilantro',e:'🌿',t:1,s:1},
+  {name:'Cucumbers',e:'🥒',t:1,s:1},
+  {name:'Lemongrass',e:'🎋',t:0.5,s:1},
+  {name:'Beef Broth',e:'🍲',t:6,s:1},
+  {name:'Chicken Broth',e:'🍜',t:3,s:1},
+  {name:'Bun Bo Hue Broth',e:'🫕',t:2,s:1},
+  {name:'Pho Count',e:'🍜',t:24,s:2},
+  {name:'Bread',e:'🥖',t:63,s:2},
+];
+
+// ── State ─────────────────────────────────────────────────────────────────────
+// counts[storeKey][weekKey][dayIdx][itemIdx]
+// submitted[storeKey][weekKey][dayIdx]
+let liveData = { sawtelle:{}, culver:{} };
+let confirmedLocation=null, currentStore=0, currentDay=0;
+const now=new Date();
+const jsDow=now.getDay();
+let todayIdx=jsDow===0?6:jsDow-1;
+currentDay=todayIdx;
+
+function getWeekKey(){
+  const d=new Date(now);
+  d.setDate(d.getDate()-(jsDow===0?6:jsDow-1));
+  return d.toISOString().slice(0,10); // e.g. "2025-04-01"
+}
+const weekKey=getWeekKey();
+
+function getWeekDates(){
+  const d=new Date(now);
+  d.setDate(d.getDate()-(jsDow===0?6:jsDow-1));
+  return DAYS.map((_,i)=>{const dd=new Date(d);dd.setDate(d.getDate()+i);return dd.toLocaleDateString('en-US',{month:'short',day:'numeric'});});
+}
+const weekDates=getWeekDates();
+
+// ── Sync indicator ────────────────────────────────────────────────────────────
+function setSyncStatus(status, label){
+  const dot=document.getElementById('syncDot');
+  const lbl=document.getElementById('syncLabel');
+  if(!dot||!lbl) return;
+  dot.className='sync-dot '+status;
+  lbl.textContent=label;
+}
+
+// ── Firebase helpers ──────────────────────────────────────────────────────────
+function dbPath(storeKey){ return `inventory/${weekKey}/${storeKey}`; }
+
+function getCount(storeKey, dayIdx, itemIdx){
+  return liveData[storeKey]?.[weekKey]?.counts?.[dayIdx]?.[itemIdx] ?? 0;
+}
+function getSubmitted(storeKey, dayIdx){
+  return liveData[storeKey]?.[weekKey]?.submitted?.[dayIdx] ?? false;
+}
+
+function saveCount(storeKey, dayIdx, itemIdx, value){
+  setSyncStatus('syncing','Saving...');
+  const path=`inventory/${weekKey}/${storeKey}/counts/${dayIdx}/${itemIdx}`;
+  set(ref(db, path), value)
+    .then(()=>setSyncStatus('synced','Saved ✓'))
+    .catch(()=>setSyncStatus('error','Save failed'));
+}
+function saveSubmitted(storeKey, dayIdx, value){
+  setSyncStatus('syncing','Saving...');
+  const path=`inventory/${weekKey}/${storeKey}/submitted/${dayIdx}`;
+  set(ref(db, path), value)
+    .then(()=>setSyncStatus('synced','Saved ✓'))
+    .catch(()=>setSyncStatus('error','Save failed'));
+}
+
+// ── Listen to Firebase in real time ──────────────────────────────────────────
+function startListening(){
+  STORE_KEYS.forEach(key=>{
+    onValue(ref(db, `inventory/${weekKey}/${key}`), snapshot=>{
+      liveData[key][weekKey] = snapshot.val() || {};
+      setSyncStatus('synced','Live ✓');
+      if(confirmedLocation!==null){
+        if(confirmedLocation===2) renderManager();
+        else renderStore();
+      }
+    }, ()=>setSyncStatus('error','Connection error'));
+  });
+}
+
+// ── UI Helpers ────────────────────────────────────────────────────────────────
+function st(c,t){const r=c/t;return r>=0.85?'ok':r>=0.5?'low':'critical';}
+
+function buildDayTabs(){
+  document.getElementById('dayTabs').innerHTML=DAYS.map((d,i)=>`
+    <div class="day-tab${i===todayIdx?' today':''}${i===currentDay?' active':''}" onclick="setDay(${i})">
+      ${d}<br><span style="font-size:10px">${weekDates[i]}</span>
+    </div>`).join('');
+}
+
+function confirmLocation(loc){
+  confirmedLocation=loc;
+  document.getElementById('locationScreen').style.display='none';
+  document.getElementById('mainApp').style.display='';
+  if(loc===2){
+    document.getElementById('locationIcon').textContent='📊';
+    document.getElementById('locationName').textContent='Manager view';
+    document.getElementById('storeView').style.display='none';
+    document.getElementById('managerView').style.display='';
+    buildDayTabs(); renderManager();
+  } else {
+    currentStore=loc;
+    document.getElementById('locationIcon').textContent=STORE_ICONS[loc];
+    document.getElementById('locationName').textContent=STORES[loc];
+    document.getElementById('storeView').style.display='';
+    document.getElementById('managerView').style.display='none';
+    buildDayTabs(); renderStore();
+  }
+}
+window.confirmLocation=confirmLocation;
+
+function changeLocation(){
+  confirmedLocation=null;
+  document.getElementById('locationScreen').style.display='';
+  document.getElementById('mainApp').style.display='none';
+}
+window.changeLocation=changeLocation;
+
+function setDay(i){
+  currentDay=i; buildDayTabs();
+  confirmedLocation===2?renderManager():renderStore();
+}
+window.setDay=setDay;
+
+// ── Render store view ─────────────────────────────────────────────────────────
+function renderStore(){
+  const s=currentStore, d=currentDay;
+  const sk=STORE_KEYS[s];
+  const isSubmitted=getSubmitted(sk,d);
+
+  let ok=0,low=0,crit=0;
+  items.forEach((item,i)=>{
+    const status=st(getCount(sk,d,i),item.t);
+    if(status==='ok')ok++; else if(status==='low')low++; else crit++;
+  });
+
+  let h=`<div class="summary-bar">
+    <div class="summary-pill ok-p"><div class="summary-num" style="color:#2E7D32">${ok}</div><div class="summary-label" style="color:#2E7D32">OK</div></div>
+    <div class="summary-pill low-p"><div class="summary-num" style="color:#E65100">${low}</div><div class="summary-label" style="color:#E65100">Low</div></div>
+    <div class="summary-pill crit-p"><div class="summary-num" style="color:#C62828">${crit}</div><div class="summary-label" style="color:#C62828">Critical</div></div>
+    <div style="margin-left:auto;font-size:11px;color:#8E8E93;text-align:right">${STORES[s]}<br>${DAYS[d]} ${weekDates[d]}</div>
+  </div>`;
+
+  if(isSubmitted){
+    h+=`<div class="submitted-bar"><span style="font-size:13px;color:#2E7D32;font-weight:600">✅ ${STORES[s]} — ${DAYS[d]} submitted</span><button class="edit-btn" onclick="editIt()">Edit</button></div>`;
+  }
+
+  [0,1,2].forEach(sec=>{
+    const secItems=items.map((item,i)=>({item,i})).filter(({item})=>item.s===sec);
+    if(!secItems.length) return;
+    if(sec>0) h+=`<div class="section-gap"></div>`;
+    secItems.forEach(({item,i},si)=>{
+      const first=si===0,last=si===secItems.length-1;
+      const stripe=si%2===0?'':'stripe-b';
+      const onlyCls=first&&last?' only':'';
+      const c=getCount(sk,d,i);
+      const status=st(c,item.t);
+      let flag='';
+      if(item.f==='check') flag=`<span class="flag flag-check">★ check 8:45pm</span>`;
+      if(item.f==='half') flag=`<span class="flag flag-half">0.5 ok</span>`;
+      h+=`<div class="item-row ${stripe}${onlyCls}">
+        <div class="status-bar bar-${status}"></div>
+        <div class="item-emoji">${item.e}</div>
+        <div class="item-info">
+          <div class="item-name">${item.name}</div>
+          <div class="item-sub">Target: ${item.t}${flag?' '+flag:''}</div>
+        </div>
+        <div class="counter">
+          <button class="btn" onclick="adj(${i},-0.5)">−</button>
+          <div class="count-val">${c}</div>
+          <button class="btn" onclick="adj(${i},0.5)">+</button>
+        </div>
+      </div>`;
+    });
+  });
+
+  if(!isSubmitted){
+    h+=`<button class="submit-btn" onclick="submitIt()">Submit ${STORES[s]} — ${DAYS[d]}</button>`;
+  }
+  document.getElementById('storeView').innerHTML=h;
+}
+
+function adj(itemIdx, delta){
+  const sk=STORE_KEYS[currentStore];
+  const cur=getCount(sk,currentDay,itemIdx);
+  const next=Math.max(0,Math.round((cur+delta)*2)/2);
+  // Optimistic local update
+  if(!liveData[sk][weekKey]) liveData[sk][weekKey]={};
+  if(!liveData[sk][weekKey].counts) liveData[sk][weekKey].counts={};
+  if(!liveData[sk][weekKey].counts[currentDay]) liveData[sk][weekKey].counts[currentDay]={};
+  liveData[sk][weekKey].counts[currentDay][itemIdx]=next;
+  renderStore();
+  saveCount(sk,currentDay,itemIdx,next);
+}
+window.adj=adj;
+
+function submitIt(){
+  const sk=STORE_KEYS[currentStore];
+  if(!liveData[sk][weekKey]) liveData[sk][weekKey]={};
+  if(!liveData[sk][weekKey].submitted) liveData[sk][weekKey].submitted={};
+  liveData[sk][weekKey].submitted[currentDay]=true;
+  renderStore();
+  saveSubmitted(sk,currentDay,true);
+}
+window.submitIt=submitIt;
+
+function editIt(){
+  const sk=STORE_KEYS[currentStore];
+  liveData[sk][weekKey].submitted[currentDay]=false;
+  renderStore();
+  saveSubmitted(sk,currentDay,false);
+}
+window.editIt=editIt;
+
+// ── Render manager view ───────────────────────────────────────────────────────
+function renderManager(){
+  const d=currentDay;
+  let h=`<div class="summary-bar" style="justify-content:space-around">`;
+  STORES.forEach((name,s)=>{
+    const sk=STORE_KEYS[s];
+    const crit=items.filter((_,i)=>st(getCount(sk,d,i),items[i].t)==='critical').length;
+    const sub=getSubmitted(sk,d);
+    h+=`<div style="text-align:center;flex:1"><div class="summary-num">${crit}</div><div class="summary-label" style="color:#8E8E93">${name}<br>${sub?'✅ done':'⏳ pending'}</div></div>`;
+  });
+  h+=`</div>`;
+
+  [0,1,2].forEach(sec=>{
+    const secItems=items.map((item,i)=>({item,i})).filter(({item})=>item.s===sec);
+    if(!secItems.length) return;
+    if(sec>0) h+=`<div class="section-gap"></div>`;
+    secItems.forEach(({item,i},si)=>{
+      const first=si===0,last=si===secItems.length-1;
+      const stripe=si%2===0?'':'stripe-b';
+      const onlyCls=first&&last?' only':'';
+      const statuses=STORE_KEYS.map(sk=>st(getCount(sk,d,i),item.t));
+      const worst=statuses.includes('critical')?'critical':statuses.includes('low')?'low':'ok';
+      h+=`<div class="mgr-row ${stripe}${onlyCls}">
+        <div class="status-bar bar-${worst}"></div>
+        <div style="font-size:22px">${item.e}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;font-weight:600;color:#1C1C1E">${item.name}</div>
+          <div style="font-size:10px;color:#8E8E93">Target: ${item.t}</div>
+        </div>
+        <div style="display:flex;gap:6px">${STORE_KEYS.map((sk,s)=>{
+          const status=st(getCount(sk,d,i),item.t);
+          const cls=status==='ok'?'ok-b':status==='low'?'low-b':'crit-b';
+          const abbr=s===1?'CC':'SW';
+          return `<div class="badge ${cls}">${abbr}: ${getCount(sk,d,i)}</div>`;
+        }).join('')}</div>
+      </div>`;
+    });
+  });
+
+  h+=`<button class="export-btn" onclick="exportCSV()">⬇ Export Weekly CSV</button>`;
+  document.getElementById('managerView').innerHTML=h;
+}
+
+function exportCSV(){
+  const rows=[['Item','Target',...DAYS.flatMap(d=>STORES.map(s=>`${d} - ${s}`)),'Week Avg - Sawtelle','Week Avg - Culver City']];
+  items.forEach((item,i)=>{
+    const row=[item.name,item.t];
+    DAYS.forEach((_,d)=>STORE_KEYS.forEach(sk=>row.push(getCount(sk,d,i))));
+    STORE_KEYS.forEach(sk=>{
+      const avg=DAYS.map((_,d)=>getCount(sk,d,i)).reduce((a,b)=>a+b,0)/7;
+      row.push(avg.toFixed(1));
+    });
+    rows.push(row);
+  });
+  const csv=rows.map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download=`inventory-week-of-${weekDates[0].replace(' ','-')}.csv`;
+  a.click();
+}
+window.exportCSV=exportCSV;
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.getElementById('dateLabel').textContent=now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+document.getElementById('weekLabel').textContent=`Week of ${weekDates[0]}`;
+startListening();
+</script>
+</body>
+</html>
