@@ -12,10 +12,9 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f2f2f7;}
 
-/* LOGIN */
 #login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;gap:14px;}
 .login-logo{width:90px;height:90px;border-radius:20px;object-fit:cover;box-shadow:0 4px 16px rgba(0,0,0,.2);}
-.login-title{font-size:22px;font-weight:800;color:#8e3014;letter-spacing:-.3px;}
+.login-title{font-size:22px;font-weight:800;color:#8e3014;}
 .login-sub{color:#888;font-size:13px;}
 .store-btn{width:100%;max-width:360px;padding:18px;font-size:17px;font-weight:700;border:none;border-radius:14px;cursor:pointer;color:white;background:#8e3014;transition:transform .1s;}
 .store-btn:active{transform:scale(.97);}
@@ -24,7 +23,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f2f2f7;
 .store-btn.settings-btn{background:#555;font-size:14px;padding:13px;}
 .login-divider{width:100%;max-width:360px;border:none;border-top:1px solid #e0e0e0;margin:4px 0;}
 
-/* PIN MODAL */
 .pin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center;}
 .pin-overlay.active{display:flex;}
 .pin-box{background:white;border-radius:22px;padding:28px 24px;width:300px;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.3);}
@@ -41,7 +39,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f2f2f7;
 .pin-error{color:#c62828;font-size:12px;font-weight:600;margin-top:10px;min-height:16px;}
 .pin-cancel{margin-top:12px;background:none;border:none;color:#888;font-size:13px;cursor:pointer;}
 
-/* TOP BAR */
 #app-screen{display:none;min-height:100vh;}
 .top-bar{position:sticky;top:0;z-index:200;background:#8e3014;color:white;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.2);}
 .top-bar-left{display:flex;align-items:center;gap:10px;}
@@ -52,14 +49,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f2f2f7;
 #live-dot{font-size:11px;opacity:.9;}
 #back-btn{background:rgba(255,255,255,.2);border:none;color:white;font-size:13px;font-weight:600;cursor:pointer;padding:6px 10px;border-radius:8px;}
 
-/* BANNERS */
 #weekend-banner{background:#e65100;color:white;text-align:center;padding:8px 16px;font-size:13px;font-weight:700;display:none;}
 #pm-reminder{background:#b71c1c;color:white;text-align:center;padding:10px 16px;font-size:14px;font-weight:700;display:none;animation:pulse 1.5s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.65}}
 
-/* ITEMS */
-.section-header{background:#424242;color:white;padding:9px 16px;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;}
-.item-card{background:white;margin:7px 8px;border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.08);overflow:hidden;}
+.item-divider{height:6px;background:#e0e0e0;margin:4px 0;}
+.item-card{background:white;margin:4px 8px;border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.08);overflow:hidden;}
 .item-main{display:flex;align-items:center;gap:11px;padding:11px 12px;}
 .item-img{width:60px;height:60px;border-radius:10px;object-fit:cover;flex-shrink:0;}
 .item-placeholder{width:60px;height:60px;border-radius:10px;flex-shrink:0;background:#f0f0f0;border:1.5px dashed #ddd;}
@@ -83,7 +78,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f2f2f7;
 .item-notes{width:100%;font-size:13px;border:1.5px solid #e0e0e0;border-radius:8px;padding:7px 10px;color:#333;resize:none;font-family:inherit;background:#fafafa;}
 .item-notes:focus{outline:none;border-color:#8e3014;background:white;}
 
-/* MANAGER */
 #mgr-screen{display:none;min-height:100vh;background:#f2f2f7;}
 .mgr-bar{position:sticky;top:0;z-index:200;background:#2e7d32;color:white;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.2);}
 .mgr-bar-left{display:flex;align-items:center;gap:10px;}
@@ -99,7 +93,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f2f2f7;
 .store-tabs{display:flex;border-bottom:2px solid #e0e0e0;background:white;}
 .store-tab{flex:1;padding:11px;text-align:center;font-size:13px;font-weight:700;border:none;background:none;cursor:pointer;color:#888;border-bottom:3px solid transparent;}
 .store-tab.active{color:#2e7d32;border-bottom-color:#2e7d32;}
-.mgr-section{background:#424242;color:white;padding:8px 16px;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;}
+.mgr-divider{height:4px;background:#e0e0e0;margin:3px 0;}
 .mgr-row{display:flex;align-items:center;padding:10px 14px;background:white;border-bottom:1px solid #f0f0f0;gap:10px;}
 .mgr-row:nth-child(even){background:#fafafa;}
 .mgr-item-name{flex:1;font-size:13px;font-weight:600;color:#222;}
@@ -109,15 +103,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f2f2f7;
 .compare-header span{font-size:11px;font-weight:700;color:#2e7d32;}
 .compare-row{display:grid;grid-template-columns:1fr 72px 72px;gap:6px;padding:9px 14px;background:white;border-bottom:1px solid #f0f0f0;align-items:center;}
 .compare-row:nth-child(even){background:#fafafa;}
+.compare-divider{height:4px;background:#e0e0e0;margin:3px 0;}
 .week-loading{text-align:center;padding:30px;color:#888;font-size:14px;}
 
-/* SETTINGS */
 #settings-screen{display:none;min-height:100vh;background:#f2f2f7;}
 .settings-bar{background:#555;color:white;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
 .settings-bar h2{font-size:17px;font-weight:700;}
 #save-settings-btn{background:#43a047;border:none;color:white;font-size:14px;font-weight:700;padding:8px 14px;border-radius:10px;cursor:pointer;}
 .settings-group{margin:10px 8px 0;}
-.settings-group-title{font-size:11px;font-weight:700;color:#888;letter-spacing:.8px;text-transform:uppercase;padding:10px 4px 4px;}
 .settings-item{background:white;border-radius:12px;margin-bottom:6px;padding:12px 14px;}
 .settings-item-name{font-size:13px;font-weight:700;color:#222;margin-bottom:8px;}
 .settings-row{display:flex;gap:10px;align-items:center;margin-top:6px;}
@@ -129,7 +122,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f2f2f7;
 </head>
 <body>
 
-<!-- PIN MODAL -->
 <div class="pin-overlay" id="pin-overlay">
   <div class="pin-box">
     <img class="pin-logo" src="data:image/png;base64,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" alt="NL">
@@ -157,7 +149,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f2f2f7;
   </div>
 </div>
 
-<!-- LOGIN -->
 <div id="login-screen">
   <img class="login-logo" src="data:image/png;base64,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" alt="Nong La">
   <div class="login-title">Nong La Cafe</div>
@@ -169,15 +160,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f2f2f7;
   <button class="store-btn settings-btn" onclick="requirePin('settings')">⚙️ Settings / Update Quantities</button>
 </div>
 
-<!-- STORE APP -->
 <div id="app-screen">
   <div class="top-bar">
     <div class="top-bar-left">
       <img class="top-bar-logo" src="data:image/png;base64,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" alt="NL">
-      <div>
-        <h2 id="store-label"></h2>
-        <div class="sub" id="top-date"></div>
-      </div>
+      <div><h2 id="store-label"></h2><div class="sub" id="top-date"></div></div>
     </div>
     <div class="top-right">
       <span id="live-dot">● Live</span>
@@ -189,15 +176,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f2f2f7;
   <div id="items-list"></div>
 </div>
 
-<!-- MANAGER -->
 <div id="mgr-screen">
   <div class="mgr-bar">
     <div class="mgr-bar-left">
       <img class="top-bar-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAKkklEQVR42u2ca4hdVxWAv7X2Ofcxr5tJJg9rk2rS2qRNsDbaFq2Kilp8iyiKbwLBVhEKigqKoKIiKMXagmj1h/aXjwrSgqIolmKtD7Q29a20ivZhk8zz3rnn7LX8ce7czMRJMk3nZtLJXnA4l5lz9j13fXuvtfba62wBnFOJCpk7iFCaA8pEo8bTxxpcON7ggmbOxroylDl1DBNhPYq600Fpl8KReeOBuYK/HO3wj6k2/+0UgJMLRBxzWZFqT3mVAKqBaI4iXLxxiCu2jrG3FdhQz1BxsIi5YQ6OsD7VXylKcFQgiIIEosPRbsmhSeOeh6f5w+FZHFAFt3hKBCcBIIiAe9Xj92wa5hXbW1zSyqjjdAxKi1SgBa1O/UbXKwAAcbAeDICgSlOFeZRDkwU/eHCSQ4dnAUNEcOeEal4WgAC5ZnTNGc6V1+3axAu21am70CkjJk5wwXumRvr3Oaxo4D05RfogKrV57y/iThRHXahlga7AnQ91uO1vjzFXRGqqdK1cOQAVwVzZMVbjwJ7N7GoIMwW4RILIulXwagAqcMQDYxn8te187Y+P8uBUFxXD3E8NoFK+s2/TKAd3b2EkzNMplKAKRBASgFP5CVfMnGZuTFqdW+5/hHsPT/d1uywAQchF6bqzb9MI1106Tu5GEYWg1mtcSeo/FQBBqfQVTckyp3Tl5vuP8PvHZqiJULjhPT3qYhSFw46xOgd3byFzozBQrWydI0n5KzJDx/Sl6pQRMoyDe7awY6xO4UujFO07F3dGcuXA7s2MhA6lCSr0WCY5HbFqCkVpwkjocGD3ZoZrCu59BooIogFHeM2uTexqCp1SCWLHDZEkj3vi1jsHMeaKwM4h5bU7J6q5kgZA0QzHzNmzcYTnb6szXVaOOMnqSpAqknzB1jqXjo9gJqg4KggB4ZU7NlB3wSTiYljq+6toihQk4hJpuHDNjhZBIKBo4XDR+DB7WhnzZSSnmtWmaH91HbMCGdCOJZeMZ1y0oUnhEQXhym2j1KlmuJ5inYHNDxwwcepuXLVtDBB0op6zr6V0rEovJBmwL3ChE4W9rcCmeg3d2WqyoZ5TmvVzO0kGaY+E6JEN9YydG5rorlaNIL4k2ZRk0PbIUXF2tWroBUO1Xt46RT1nyhu4KMTIBUM1dGMjEN3Q1P3PYFQkRIxN9YAOZY75sXApyaCVD0il82bmaB3DkZTzOeMhqdDAyEyqNdyU6zxzyl+w9iaSPO9aSwKQACQASRKABCBJAnBuSjb4mZ+iKktK+YCqPuYkJXtL2hAQ0eP6jeFmy97tIktn9S69BICddXOdwQIQoSg7+MwcRrZkGpI1G+RaJ0oJArLcWoQbroFYlpTt6YoEgEdQIW+O9davF8oErSomjlXdzbFCYcdEcRHCOQNABC8KRrfuZGTv5Yh1q6o6NzTkPHbvL5l/5EFCPlwpdJkZIxrwsktz4nxaz7wcolUFwxLwMnL4njux+RnQgPZSKo5T1ut4Vke8GneGkNk82i3Puvn+wACoKnOdOZ62/wpe/rEb/u//f7vnJ9zxvjeT5b580Zc4mee0O5NsuWQfr/jkl5f8O3rJ1974POxfR9GQ4S4oGXPzU7zoYzew4/Ln42WnGjUhMPvow3z/+rchU0cgy8H9HDBBCFgXt0gsIyELlTkwZ9cVL+IZr3oTf7rtmwy1NmAxHqd/wdRwlMKKyt5bRCqHQNFuozEn9o0PIBExpbX1fFoTW5a018gaZK6UnF35l4E/i6CIBkQXzlmvxxpXvOdDNLY8Fet2j9n3ZduQRfcvtKUnvNqKLu6OxRKPhrtTFvOcjenGM9YZFutXRDAzxrecz/4D1zPXnkVVV089Isgyx7k3D1hUyn68cjUELEYue/072PrsqylmjqIaVthLF1aQjCd7In3NzKH0QsSQ51z93o9SZg3w8pybG67pr5UQ8BjZftlV7HnDu5mfnIIsJABn9gkEd+d5B66nuX0XNj+HqyL9deoEYCDi7rg7Ioqb0dy4mWdf+wG6cwUijktlpjwBWH2JsaSMsYKAIwpljOy95o1MvPAlFJOzEFbqkBOAFcvCC2pTjz7Er757axV6miGiBBFCyHnxdR/Ch5poab2kWgKwmlFpNSttNvjtN27g0b8cQjVgBqKKWcm2i/ez7y0HmZs6TKYhmaCBgMhzfHqKO2/8RPUmvhvgiATMIle+8/2MXriPbmf2uDR0ArA6DriMNEbHefCnd3DoR99DQyDGLi6Ce0ljtMVV136QdhlR8XVdt7pGv0yI7tQagbtv+iRzRx9BpYaYQ8iIscvFL30tF77wVczNTKMhJACrOgIExErq+SgzD/ydn3/1C4gK7t1elZ6iKFe+/yPkoxuRspsArGr/772bX3rJ8OgGDn3nVv5976/QUAcDDRkWI5u3X8j+t76HztRMAjCQkQCIQtad584bP04si/4ioqrgblz2ruuY2Le/P2lLAFYZgUenPjLCv395F/fd9vUqHI0RRDEizbHN7H/7tdUKlqy/5MSadykXIEZGmiPcdcsNTD78AKJCYUYgR4HR1qaTLMAkAE9YSnG0Vqd4+CF+ftNnEVHUraqWUDlr1m/XLQB1iFY55D/f/m3+cdePCSHDYtHbS2c1zI6gGh73ETQMdBe87KzoBtLzBxh5UH76pU9z3rOeQ60xhHsEwmkzMKmaj1YyOztDMXsEzWorGlUuhsaMZrOOaw0hrlMACz/YS/LmKEf+cDe//ubNPPfgh/FuxHJD+2toj49sVbfl1Fobedmnb8KiVaFXPxw+gV/qBwkFd9/4Keb/80+yvNbbxHCdAgCl9C5jIy1+c+tXuOglr2Zi56V4LCE7nUet9q+KYtTqTS6++prTeqrf3fJF5mMBtdqqZ8gH7gMc6S2+HFuEwb0yDV4dvsQfOJ7VYfooP/vSZ/rDfuHe6rBe1dvS7acW9mOQJdc64oK4YbEgxnLFh8WSbncOYsTJBhICDxyA9kpCQpahqogIetJ1X8FjpDk6xr9+cjv3/fBb1b1SlbOICiIZmucnLDXRkFXfs3AWqSKrkBNCtuJDQ0ZWa+I6uL3yBmqCBCF2O7RnJrGi6BdUdSYP95zgiXtUxGg0Gvzi5s9z3p7LaIw/BfGyMtAKRbuN2/+/XCsCnemjtGcm8bLb25nqiSQNY2UCB6WjL1+9fWBBtrvjtSahOVyZhQUH5wYzkyeNRBxQUaws0KFhaAyD9XaiBcScODtdQTnuxjA0jOWNam+2XtlQL/10zOSd7DOL+0fEZqarimt5so0AEejOYu2pKgPqi8ZGlp8yMnU3NMvw9hw2O9UfMNLLSmjIqn0XjruxnJ3C7ciqmGxHq3T4gCrrBh8FSYA8qxTmS7JAKx5FhLBkTWCht55oixEJGRKyYz7aF1NdwefFbfnjedqzEMDClpg8ETfmvkRPfqoIYvH1vki/K/y83Het61TEys3B6V3vJ2jDT9L2mco+pZf0UjIuAUiSACQASRKAc1My1cRgTQHMTbeTFtYSwFVv2Ju0sJYAzts9kbSwhiKfu2Q8bZa4liMgq4ekhbUEkDYLTfOABCBJApAAJEkAEoAkCUACkCQBSACSJAAJQJIEIAFIkgAkAEkSgAQgyeDkf8QGpwsk33UQAAAAAElFTkSuQmCC" alt="NL">
-      <div>
-        <h2>Manager View</h2>
-        <div class="sub" id="mgr-date-label"></div>
-      </div>
+      <div><h2>Manager View</h2><div class="sub" id="mgr-date-label"></div></div>
     </div>
     <div class="mgr-actions">
       <button class="mgr-btn dl"  onclick="downloadCSV()">⬇ Day CSV</button>
@@ -214,7 +197,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f2f2f7;
   <div id="mgr-content"></div>
 </div>
 
-<!-- SETTINGS -->
 <div id="settings-screen">
   <div class="settings-bar">
     <h2>⚙️ Quantities</h2>
@@ -296,142 +278,120 @@ const DEFAULT_PARS = {
 };
 
 const ITEM_DEFS = [
-  ['section','Fresh Prep'],
-  ['Cucumbers for Bun',      'Cucumbers_for_Bun', ['half']],
-  ['Jalapeños',              'Jalapenos',          []],
-  ['Limes',                  'Limes',              []],
-  ['Herbs',                  null,                 []],
-  ['Lettuce for Bun',        'Lettuce_for_Bun',    []],
-  ['Green Onions',           'Green_Onions',       []],
-  ['section','Proteins'],
-  ['Shrimp for Spring Roll', 'Shrimp_for_SR',      []],
-  ['Pork for Spring Roll',   'Pork_for_SR',        []],
-  ['Brisket (Sliced)',       'Brisket',            ['check']],
-  ['Filet',                  'Filet',              ['check']],
-  ['Grilled Pork',           null,                 ['check']],
-  ['Grilled Steak',          null,                 ['check']],
-  ['Grilled Chicken',        null,                 ['check']],
-  ['Beef Shank Cooked',      null,                 ['check']],
-  ['Chicken Shredded Cooked',null,                 ['check']],
-  ['Tripe',                  null,                 []],
-  ['Pork Belly',             null,                 []],
-  ['Beefballs',              null,                 []],
-  ['Eggroll',                null,                 []],
-  ['Pork Patties',           null,                 []],
-  ['section','Broths'],
-  ['Beef Broth',             null,                 []],
-  ['Chicken Broth',          null,                 []],
-  ['Bun Bo Hue Broth',       null,                 []],
-  ['Veggie Broth',           null,                 []],
-  ['section','Sauces & Condiments'],
-  ['Fish Sauce',             null,                 []],
-  ['Pork Belly Sauce',       null,                 []],
-  ['Ginger Sauce',           null,                 []],
-  ['Vegetarian Sauce',       null,                 []],
-  ['BBH Chili Oil',          null,                 []],
-  ['Pickled Carrots/Daikon', null,                 []],
-  ['section','Veggies & Garnish'],
-  ['Basil',                  null,                 []],
-  ['Mint',                   null,                 []],
-  ['Whole Lettuce',          null,                 []],
-  ['Sprouts',                null,                 []],
-  ['Cilantro',               null,                 []],
-  ['Cucumbers',              null,                 []],
-  ['Lemongrass',             null,                 []],
-  ['White Onions',           null,                 []],
-  ['section','Cooked Items'],
-  ['Mushrooms Cooked',       null,                 []],
-  ['Fried Tofu Cooked',      null,                 []],
-  ['Chef Special',           null,                 []],
-  ['Veggie Pho - Carrots & Daikon', null,          []],
-  ['section','Counts'],
-  ['Pho Count',              null,                 [], true],
-  ['Bread',                  null,                 [], true],
-  ['Gluten Free Bread',      null,                 [], true],
-  ['section','Dry & Other'],
-  ['Eggs',                   null,                 []],
-  ['Sandwich Bags',          null,                 []],
+  ['Cucumbers for Bun',            'Cucumbers_for_Bun', ['half']],
+  ['Jalapeños',                    'Jalapenos',          []],
+  ['Limes',                        'Limes',              []],
+  ['Herbs',                        null,                 []],
+  ['Lettuce for Bun',              'Lettuce_for_Bun',    []],
+  ['Green Onions',                 'Green_Onions',       []],
+  ['Shrimp for Spring Roll',       'Shrimp_for_SR',      []],
+  ['Pork for Spring Roll',         'Pork_for_SR',        []],
+  ['Brisket (Sliced)',             'Brisket',            ['check']],
+  ['Filet',                        'Filet',              ['check']],
+  ['divider'],
+  ['Veggie Broth',                 null, []],
+  ['Fish Sauce',                   null, []],
+  ['Pickled Carrots/Daikon',       null, []],
+  ['divider'],
+  ['Eggroll',                      null, []],
+  ['Pork Patties',                 null, []],
+  ['Tripe',                        null, []],
+  ['Pork Belly',                   null, []],
+  ['Pork Belly Sauce',             null, []],
+  ['Ginger Sauce',                 null, []],
+  ['Mushrooms Cooked',             null, []],
+  ['Fried Tofu Cooked',            null, []],
+  ['Beef Shank Cooked',            null, ['check']],
+  ['Chicken Shredded Cooked',      null, ['check']],
+  ['Chef Special',                 null, []],
+  ['White Onions',                 null, []],
+  ['divider'],
+  ['Beefballs',                    null, []],
+  ['Eggs',                         null, []],
+  ['Veggie Pho - Carrots & Daikon',null, []],
+  ['Vegetarian Sauce',             null, []],
+  ['BBH Chili Oil',                null, []],
+  ['Sandwich Bags',                null, []],
+  ['divider'],
+  ['Grilled Pork',                 null, ['check']],
+  ['Grilled Steak',                null, ['check']],
+  ['Grilled Chicken',              null, ['check']],
+  ['Basil',                        null, []],
+  ['Mint',                         null, []],
+  ['Whole Lettuce',                null, []],
+  ['Sprouts',                      null, []],
+  ['Cilantro',                     null, []],
+  ['Cucumbers',                    null, []],
+  ['Lemongrass',                   null, []],
+  ['divider'],
+  ['Beef Broth',                   null, []],
+  ['Chicken Broth',                null, []],
+  ['Bun Bo Hue Broth',             null, []],
+  ['divider'],
+  ['Pho Count',                    null, [], true],
+  ['Bread',                        null, [], true],
+  ['Gluten Free Bread',            null, [], true],
 ];
 
 let storeName='', counts={}, notes={}, pars={}, saveTimer=null, notesTimer=null;
 let pinTarget='', pinEntry='';
 let mgrDay='', mgrStore='Sawtelle', mgrData={};
 
-/* DATES */
-function isWeekend(d) { const day=(d||new Date()).getDay(); return day===0||day===5||day===6; }
-function isPM845()   { const n=new Date(); return n.getHours()===20&&n.getMinutes()>=45; }
-function fmtDate(d)  { return d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}); }
-function fmtDateFull(d) { return d.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric',year:'numeric'}); }
-function dateKey(d)  { return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function isWeekend(d){const day=(d||new Date()).getDay();return day===0||day===5||day===6;}
+function isPM845(){const n=new Date();return n.getHours()===20&&n.getMinutes()>=45;}
+function fmtDate(d){return d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});}
+function fmtDateFull(d){return d.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric',year:'numeric'});}
+function dateKey(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 
-// Last 7 days for day selector
-function getWeekDays() {
+function getWeekDays(){
   const days=[];
-  for(let i=6;i>=0;i--){ const d=new Date(); d.setDate(d.getDate()-i); days.push(d); }
+  for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push(d);}
   return days;
 }
-
-// Previous Mon–Sun week (completes on Sunday, available Monday)
-function getPrevWeekRange() {
+function getPrevWeekRange(){
   const today=new Date();
-  const dayOfWeek=today.getDay(); // 0=Sun, 1=Mon ...
-  // End = last Sunday
+  const dow=today.getDay();
   const end=new Date(today);
-  end.setDate(today.getDate() - (dayOfWeek===0 ? 7 : dayOfWeek));
-  // Start = Monday before that
+  end.setDate(today.getDate()-(dow===0?7:dow));
   const start=new Date(end);
   start.setDate(end.getDate()-6);
-  return {start, end};
+  return {start,end};
 }
-
-function getPrevWeekDays() {
-  const {start} = getPrevWeekRange();
+function getPrevWeekDays(){
+  const {start}=getPrevWeekRange();
   const days=[];
-  for(let i=0;i<7;i++){ const d=new Date(start); d.setDate(start.getDate()+i); days.push(d); }
+  for(let i=0;i<7;i++){const d=new Date(start);d.setDate(start.getDate()+i);days.push(d);}
   return days;
 }
 
-document.getElementById('login-date').textContent = fmtDateFull(new Date());
+document.getElementById('login-date').textContent=fmtDateFull(new Date());
 
-/* PIN */
-function requirePin(target) {
-  pinTarget=target; pinEntry='';
+function requirePin(target){
+  pinTarget=target;pinEntry='';
   document.getElementById('pin-error').textContent='';
-  document.getElementById('pin-title').textContent = target==='manager'?'🔒 Manager PIN':'🔒 Settings PIN';
+  document.getElementById('pin-title').textContent=target==='manager'?'🔒 Manager PIN':'🔒 Settings PIN';
   updatePinDots();
   document.getElementById('pin-overlay').classList.add('active');
 }
-function pinKey(k) {
-  if(pinEntry.length>=4) return;
-  pinEntry+=k; updatePinDots();
-  if(pinEntry.length===4) setTimeout(checkPin,150);
-}
-function pinDel() { pinEntry=pinEntry.slice(0,-1); updatePinDots(); }
-function updatePinDots() {
-  for(let i=0;i<4;i++) document.getElementById('pd'+i).className='pin-dot'+(i<pinEntry.length?' filled':'');
-}
-function checkPin() {
-  if(pinEntry===PIN) {
+function pinKey(k){if(pinEntry.length>=4)return;pinEntry+=k;updatePinDots();if(pinEntry.length===4)setTimeout(checkPin,150);}
+function pinDel(){pinEntry=pinEntry.slice(0,-1);updatePinDots();}
+function updatePinDots(){for(let i=0;i<4;i++)document.getElementById('pd'+i).className='pin-dot'+(i<pinEntry.length?' filled':'');}
+function checkPin(){
+  if(pinEntry===PIN){
     document.getElementById('pin-overlay').classList.remove('active');
-    if(pinTarget==='manager') openManager(); else openSettings();
-  } else {
+    if(pinTarget==='manager')openManager();else openSettings();
+  }else{
     document.getElementById('pin-error').textContent='Incorrect PIN. Try again.';
-    pinEntry=''; updatePinDots();
+    pinEntry='';updatePinDots();
   }
 }
-function pinCancel() { document.getElementById('pin-overlay').classList.remove('active'); pinEntry=''; pinTarget=''; }
+function pinCancel(){document.getElementById('pin-overlay').classList.remove('active');pinEntry='';pinTarget='';}
 
-/* STORE */
-function loadPars() {
-  const s=localStorage.getItem('pars');
-  pars=s?JSON.parse(s):JSON.parse(JSON.stringify(DEFAULT_PARS));
-}
-function getPar(name) {
-  const p=pars[name]||DEFAULT_PARS[name]; if(!p) return '—';
-  return isWeekend()?(p.we||p.wd):p.wd;
-}
-function openStore(name) {
-  storeName=name; loadPars(); counts={}; notes={};
+function loadPars(){const s=localStorage.getItem('pars');pars=s?JSON.parse(s):JSON.parse(JSON.stringify(DEFAULT_PARS));}
+function getPar(name){const p=pars[name]||DEFAULT_PARS[name];if(!p)return'—';return isWeekend()?(p.we||p.wd):p.wd;}
+
+function openStore(name){
+  storeName=name;loadPars();counts={};notes={};
   document.getElementById('login-screen').style.display='none';
   document.getElementById('app-screen').style.display='block';
   document.getElementById('store-label').textContent=name;
@@ -441,21 +401,19 @@ function openStore(name) {
   setInterval(()=>{document.getElementById('pm-reminder').style.display=isPM845()?'block':'none';},60000);
   loadData();
 }
-function goBack() {
+function goBack(){
   ['app-screen','mgr-screen','settings-screen'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('login-screen').style.display='flex';
-  counts={}; notes={}; mgrData={};
+  counts={};notes={};mgrData={};
 }
-function fbBase(store,key) {
-  return FB_URL+'/inventory/'+(store||storeName).replace(' ','_')+'/'+(key||dateKey(new Date()));
-}
-async function loadData() {
-  try {
+function fbBase(store,key){return FB_URL+'/inventory/'+(store||storeName).replace(' ','_')+'/'+(key||dateKey(new Date()));}
+async function loadData(){
+  try{
     const r=await fetch(fbBase()+'.json');
     const d=await r.json();
     if(d){counts=d.counts||{};notes=d.notes||{};}
-    renderItems(); setLive('● Live');
-  } catch(e) { setLive('○ Offline'); renderItems(); }
+    renderItems();setLive('● Live');
+  }catch(e){setLive('○ Offline');renderItems();}
 }
 function setLive(t){document.getElementById('live-dot').textContent=t;}
 function scheduleSave(){setLive('◌ Saving...');clearTimeout(saveTimer);saveTimer=setTimeout(pushData,1200);}
@@ -468,14 +426,14 @@ async function pushData(){
 function getCount(n){return counts[n]??0;}
 function getNote(n){return notes[n]??'';}
 function change(n,delta){
-  let v=getCount(n)+delta; if(v<0)v=0;
+  let v=getCount(n)+delta;if(v<0)v=0;
   counts[n]=v;
-  const el=document.getElementById('val-'+CSS.escape(n)); if(el)el.textContent=v;
-  updateDot(n,v); scheduleSave();
+  const el=document.getElementById('val-'+CSS.escape(n));if(el)el.textContent=v;
+  updateDot(n,v);scheduleSave();
 }
 function setTextCount(n,v){counts[n]=v;scheduleSave();}
 function updateDot(n,v){
-  const d=document.getElementById('dot-'+CSS.escape(n)); if(!d)return;
+  const d=document.getElementById('dot-'+CSS.escape(n));if(!d)return;
   d.className='status-dot '+(v===0?'dot-empty':v===1?'dot-low':'dot-ok');
 }
 function saveNote(n,v){notes[n]=v;clearTimeout(notesTimer);notesTimer=setTimeout(pushData,1500);}
@@ -490,16 +448,16 @@ function toggleNotes(n){
 function esc(s){return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'");}
 
 function renderItems(){
-  const list=document.getElementById('items-list'); list.innerHTML='';
+  const list=document.getElementById('items-list');list.innerHTML='';
   const we=isWeekend();
   for(const item of ITEM_DEFS){
-    if(item[0]==='section'){
-      const s=document.createElement('div');s.className='section-header';s.textContent=item[1];list.appendChild(s);continue;
+    if(item[0]==='divider'){
+      const div=document.createElement('div');div.className='item-divider';list.appendChild(div);continue;
     }
     const [name,photoKey,flags,isText]=item;
     const v=getCount(name),note=getNote(name);
     const p=pars[name]||DEFAULT_PARS[name]||{wd:'—',we:'—'};
-    const card=document.createElement('div'); card.className='item-card';
+    const card=document.createElement('div');card.className='item-card';
     let imgEl;
     if(photoKey&&PHOTOS[photoKey]){
       imgEl=document.createElement('img');imgEl.className='item-img';imgEl.src=PHOTOS[photoKey];imgEl.alt=name;
@@ -530,7 +488,6 @@ function renderItems(){
   }
 }
 
-/* MANAGER */
 async function openManager(){
   document.getElementById('login-screen').style.display='none';
   document.getElementById('mgr-screen').style.display='block';
@@ -542,12 +499,11 @@ async function openManager(){
   await loadMgrData();
 }
 function buildWeekSelector(){
-  const sel=document.getElementById('week-selector'); sel.innerHTML='';
+  const sel=document.getElementById('week-selector');sel.innerHTML='';
   getWeekDays().forEach(d=>{
     const key=dateKey(d);
     const btn=document.createElement('button');
-    btn.className='day-tab'; btn.dataset.key=key;
-    btn.textContent=fmtDate(d);
+    btn.className='day-tab';btn.dataset.key=key;btn.textContent=fmtDate(d);
     btn.onclick=async()=>{mgrDay=key;document.querySelectorAll('.day-tab').forEach(t=>t.classList.toggle('active',t.dataset.key===key));await loadMgrData();};
     sel.appendChild(btn);
   });
@@ -571,14 +527,14 @@ function switchMgrTab(store){
   renderMgr();
 }
 function renderMgr(){
-  const el=document.getElementById('mgr-content'); el.innerHTML='';
+  const el=document.getElementById('mgr-content');el.innerHTML='';
   if(mgrStore==='Both'){renderMgrBoth(el);return;}
   const data=mgrData[mgrStore]||{counts:{},notes:{}};
-  const c=data.counts||{}, n=data.notes||{};
+  const c=data.counts||{},n=data.notes||{};
   for(const item of ITEM_DEFS){
-    if(item[0]==='section'){const sh=document.createElement('div');sh.className='mgr-section';sh.textContent=item[1];el.appendChild(sh);continue;}
-    const [name]=item; const v=c[name]??'—'; const note=n[name]||'';
-    const row=document.createElement('div'); row.className='mgr-row';
+    if(item[0]==='divider'){const d=document.createElement('div');d.className='mgr-divider';el.appendChild(d);continue;}
+    const [name]=item;const v=c[name]??'—';const note=n[name]||'';
+    const row=document.createElement('div');row.className='mgr-row';
     row.innerHTML=`<div class="mgr-item-name">${name}${note?`<div class="mgr-note">📝 ${note}</div>`:''}</div><div class="mgr-count">${v}</div>`;
     el.appendChild(row);
   }
@@ -586,12 +542,18 @@ function renderMgr(){
 function renderMgrBoth(el){
   const saw=(mgrData['Sawtelle']||{}).counts||{};
   const cc=(mgrData['Culver City']||{}).counts||{};
+  let firstSection=true;
   for(const item of ITEM_DEFS){
-    if(item[0]==='section'){
-      const sh=document.createElement('div');sh.className='mgr-section';sh.textContent=item[1];el.appendChild(sh);
+    if(item[0]==='divider'){
+      const d=document.createElement('div');d.className='compare-divider';el.appendChild(d);
+      const hdr=document.createElement('div');hdr.className='compare-header';
+      hdr.innerHTML='<span></span><span style="text-align:right">Sawtelle</span><span style="text-align:right">Culver City</span>';
+      el.appendChild(hdr);continue;
+    }
+    if(firstSection){
       const hdr=document.createElement('div');hdr.className='compare-header';
       hdr.innerHTML='<span>Item</span><span style="text-align:right">Sawtelle</span><span style="text-align:right">Culver City</span>';
-      el.appendChild(hdr);continue;
+      el.insertBefore(hdr,el.firstChild);firstSection=false;
     }
     const [name]=item;
     const row=document.createElement('div');row.className='compare-row';
@@ -600,18 +562,13 @@ function renderMgrBoth(el){
   }
 }
 
-/* CSV DOWNLOADS */
-function buildCSVFromData(allData, days){
-  // allData: { 'Sawtelle': { 'YYYY-MM-DD': {counts,notes}, ... }, 'Culver City': ... }
+function buildCSVFromData(allData,days){
   const stores=['Sawtelle','Culver City'];
   const headers=['Item'];
-  days.forEach(d=>{
-    const label=fmtDate(d);
-    stores.forEach(s=>headers.push(`${s} ${label}`));
-  });
+  days.forEach(d=>{stores.forEach(s=>headers.push(s+' '+fmtDate(d)));} );
   const rows=[headers];
   for(const item of ITEM_DEFS){
-    if(item[0]==='section') continue;
+    if(item[0]==='divider')continue;
     const [name]=item;
     const row=[name];
     days.forEach(d=>{
@@ -625,27 +582,20 @@ function buildCSVFromData(allData, days){
   }
   return rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');
 }
-
-function triggerCSVDownload(csv, filename){
+function triggerCSVDownload(csv,filename){
   const blob=new Blob([csv],{type:'text/csv'});
   const url=URL.createObjectURL(blob);
-  const a=document.createElement('a'); a.href=url; a.download=filename;
-  a.click(); URL.revokeObjectURL(url);
+  const a=document.createElement('a');a.href=url;a.download=filename;a.click();URL.revokeObjectURL(url);
 }
-
 function downloadCSV(){
-  // Single day — current mgrDay, both stores
   const d=new Date(mgrDay+'T12:00:00');
   const allData={'Sawtelle':{},'Culver City':{}};
   allData['Sawtelle'][mgrDay]=mgrData['Sawtelle']||{};
   allData['Culver City'][mgrDay]=mgrData['Culver City']||{};
-  const csv=buildCSVFromData(allData,[d]);
-  triggerCSVDownload(csv,'NLC_inventory_'+mgrDay+'.csv');
+  triggerCSVDownload(buildCSVFromData(allData,[d]),'NLC_inventory_'+mgrDay+'.csv');
 }
-
 async function downloadWeekCSV(){
-  const el=document.getElementById('mgr-content');
-  el.innerHTML='<div class="week-loading">⏳ Loading week data from both stores...</div>';
+  document.getElementById('mgr-content').innerHTML='<div class="week-loading">⏳ Loading week data...</div>';
   const days=getPrevWeekDays();
   const stores=['Sawtelle','Culver City'];
   const allData={'Sawtelle':{},'Culver City':{}};
@@ -660,13 +610,10 @@ async function downloadWeekCSV(){
     }));
   }));
   const {start,end}=getPrevWeekRange();
-  const filename=`NLC_week_${dateKey(start)}_to_${dateKey(end)}.csv`;
-  const csv=buildCSVFromData(allData,days);
-  triggerCSVDownload(csv,filename);
-  renderMgr(); // restore view
+  triggerCSVDownload(buildCSVFromData(allData,days),'NLC_week_'+dateKey(start)+'_to_'+dateKey(end)+'.csv');
+  renderMgr();
 }
 
-/* SETTINGS */
 function openSettings(){
   loadPars();
   document.getElementById('login-screen').style.display='none';
@@ -674,34 +621,28 @@ function openSettings(){
   renderSettings();
 }
 function renderSettings(){
-  const list=document.getElementById('settings-list'); list.innerHTML='';
-  let sec='';
+  const list=document.getElementById('settings-list');list.innerHTML='';
   for(const item of ITEM_DEFS){
-    if(item[0]==='section'){
-      sec=item[1];
-      const g=document.createElement('div');g.className='settings-group';
-      g.innerHTML=`<div class="settings-group-title">${sec}</div>`;
-      g.id='sg-'+sec; list.appendChild(g); continue;
-    }
+    if(item[0]==='divider')continue;
     const [name]=item;
     const p=pars[name]||DEFAULT_PARS[name]||{wd:'',we:''};
-    const grp=document.getElementById('sg-'+sec)||list;
     const div=document.createElement('div');div.className='settings-item';
+    div.style.margin='4px 8px';
     div.innerHTML=`<div class="settings-item-name">${name}</div>
       <div class="settings-row"><span class="settings-label">Mon–Thu:</span><input class="settings-input" id="swd-${CSS.escape(name)}" value="${p.wd||''}"></div>
       <div class="settings-row"><span class="settings-label">Fri–Sun:</span><input class="settings-input" id="swe-${CSS.escape(name)}" value="${p.we||''}"></div>`;
-    grp.appendChild(div);
+    list.appendChild(div);
   }
 }
 function saveSettings(){
   for(const item of ITEM_DEFS){
-    if(item[0]==='section') continue;
+    if(item[0]==='divider')continue;
     const [name]=item;
-    if(!pars[name]) pars[name]={wd:'',we:''};
+    if(!pars[name])pars[name]={wd:'',we:''};
     const w=document.getElementById('swd-'+CSS.escape(name));
     const e=document.getElementById('swe-'+CSS.escape(name));
-    if(w) pars[name].wd=w.value;
-    if(e) pars[name].we=e.value;
+    if(w)pars[name].wd=w.value;
+    if(e)pars[name].we=e.value;
   }
   localStorage.setItem('pars',JSON.stringify(pars));
   const msg=document.getElementById('save-msg');msg.style.display='block';
